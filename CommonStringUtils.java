@@ -28,9 +28,13 @@ public class CommonStringUtils {
     } catch (UnsupportedEncodingException e) {
       log.error("Error while decoding string", e);
       return "";
+    }catch(Exception e){
+      log.info("String [{}] is not properly encoded", encodedString, e);
+      String unescapedString = StringEscapeUtils.unescapeHtml4(encodedString);
+      log.debug("[{}] is decoded to [{}]", encodedString, unescapedString);
+      return unescapedString;
     }
   }
-
   /**
    * @param anyString any string.
    * @return String where diactrictices are converted to normal character.
